@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './tasksFilter.css';
-
+// check
 const TasksFilter = ({ filter, onChangeFilter }) => {
   const buttonsDescription = [
     { name: 'all', label: 'All' },
