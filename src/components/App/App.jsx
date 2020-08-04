@@ -57,13 +57,15 @@ export default class App extends Component {
     });
   };
 
-  addItem = (description) => {
+  addItem = ({ value, min, sec }) => {
     this.setState(({ tasks }) => {
       return {
         tasks: [
           ...tasks,
           {
-            description,
+            description: value,
+            min,
+            sec,
             created: new Date(),
             isEdit: false,
             isDone: false,
