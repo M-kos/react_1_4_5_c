@@ -1,12 +1,13 @@
 import React from 'react';
 import { formatDistance } from 'date-fns';
 import PropTypes from 'prop-types';
+import Timer from '../Timer/Timer';
 
 import './task.css';
 
 const Task = (props) => {
   const { toggleDone, toggleEdit, onDeleted, task } = props;
-  const { description, created, id, isEdit, isDone } = task;
+  const { description, created, id, isEdit, isDone, min, sec } = task;
   let className = '';
 
   if (isEdit) {
@@ -23,12 +24,15 @@ const Task = (props) => {
     }
   };
 
+  const timer = min || sec ? <Timer min={min} sec={sec} /> : null;
+
   return (
     <li className={className}>
       <div className="view">
         <input className="toggle" type="checkbox" checked={isDone} onChange={toggleDone} />
         <label>
           <span className="description">{description}</span>
+          {timer}
           <span className="created">{`created ${formatDistance(created, new Date(), {
             includeSeconds: true,
           })} ago`}</span>
@@ -64,6 +68,8 @@ Task.propTypes = {
     created: PropTypes.instanceOf(Date),
     isEdit: PropTypes.bool,
     isDone: PropTypes.bool,
+    min: PropTypes.number,
+    sec: PropTypes.number,
   }),
   toggleDone: PropTypes.func,
   onDeleted: PropTypes.func,
